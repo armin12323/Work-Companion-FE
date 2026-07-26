@@ -1,4 +1,7 @@
 {
+    "name": "work-companion-fe-page",
+    "compatibility_date": "2026-07-26",
+    "main": "index.html",
 	"vars": {
 		"VITE_CLERK_PUBLISHABLE_KEY": "pk_test_b3JpZW50ZWQtamVubmV0LTY3LmNsZXJrLmFjY291bnRzLmRldiQ"
 	}
