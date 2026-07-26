@@ -5,12 +5,13 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import { Show, SignInButton, SignUpButton, UserButton, ClerkProvider } from '@clerk/react'
 import { StrictMode } from 'react'
 import App from './src/App'
+import { env } from "cloudflare:workers"
 // import "bootstrap/dist/css/bootstrap.min.css";
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const PUBLISHABLE_KEY = env.VITE_CLERK_PUBLISHABLE_KEY
 
 if (!PUBLISHABLE_KEY) {
-  throw new Error('Missing Publishable Key OOOOO - ARMIN')
+  throw new Error('Missing Publishable Key')
 }
 
 createRoot(document.getElementById('root')).render(
