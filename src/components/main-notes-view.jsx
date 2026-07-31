@@ -4,6 +4,7 @@ import { NoteMeetings } from "./note-meetings"
 import { useState, useEffect } from "react"
 import { useUser } from "@clerk/react"
 import { Note } from "./note"
+import { data } from "react-router-dom"
 
 
 export function MainNotesView() {
@@ -17,6 +18,34 @@ export function MainNotesView() {
   const [show, setShow] = useState(false);
   const [noteToDelete, setNoteToDelete] = useState(null)
   const {user} = useUser()
+
+  console.log('user testing for eldinas account: ', user)
+
+  function createUser() {
+
+    fetch("https://d1-worker.armink499.workers.dev/api/users/create", {
+            method: 'POST',
+            body: JSON.stringify({clerk_id: user.id, email: user.emailAddresses[0].emailAddress})
+        }).then(response => {
+            response.text().then((data) => {
+                console.log(data)
+            })
+        })
+    
+  }
+
+  const checkDbForAccount = fetch("https://d1-worker.armink499.workers.dev/api/users", {
+            method: 'POST',
+            body: JSON.stringify({clerk_id: user.id})
+        }).then(response => {
+            response.text().then((data) => {
+                console.log('User Found: ', data)
+                if (data === 'User Not Found') {
+                    console.log('createUser CALLED')
+                    createUser()
+                }
+            })
+        })
 
   const fetchNotes = () => {
     fetch("https://d1-worker.armink499.workers.dev/api/notes", {
