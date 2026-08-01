@@ -4,8 +4,6 @@ import { useEffect, useState } from "react"
 
 export function NotesContent(props) {
 
-    console.log('props upon new note creation: ', props)
-
     const [noteTitle, setNoteTitle] = useState('')
     const [noteNote, setNoteNote] = useState('')
     const [noteDueDate, setNoteDueDate] = useState('')

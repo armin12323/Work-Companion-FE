@@ -19,7 +19,6 @@ export function MainNotesView() {
   const [noteToDelete, setNoteToDelete] = useState(null)
   const {user} = useUser()
 
-  console.log('user testing for eldinas account: ', user)
 
   function createUser() {
 
@@ -39,9 +38,7 @@ export function MainNotesView() {
             body: JSON.stringify({clerk_id: user.id})
         }).then(response => {
             response.text().then((data) => {
-                console.log('User Found: ', data)
                 if (data === 'User Not Found') {
-                    console.log('createUser CALLED')
                     createUser()
                 }
             })
@@ -89,7 +86,6 @@ export function MainNotesView() {
     .then((result) => {
 
       const newNoteUserID = result.userID
-      console.log('result.noteID: ', result.noteID)
       const newNoteID = result.noteID
       const allNotes = notes
       const newNote = {id: newNoteID, title: title, note: '', date_created: formattedDate, modified: formattedDate, due_date: '', user_id: newNoteUserID}
@@ -98,6 +94,14 @@ export function MainNotesView() {
       setTitle("")
       fetchNotes()
     })
+  }
+
+  const handleKeyDown = (event) => {
+
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      addNewNote()
+    }
   }
 
   const deleteNote = (id) => {
@@ -197,7 +201,8 @@ export function MainNotesView() {
                   required
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-              />
+                  onKeyDown={handleKeyDown}
+                />
           </form>
 
           <div style={{"paddingLeft": "50px"}}>
