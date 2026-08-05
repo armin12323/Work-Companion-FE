@@ -1,0 +1,9 @@
+.sign-in-div {
+    background-color: #ffffff38;
+    align-content: center;
+    margin: auto;
+    height: 200px;
+    width: 300px;
+    border: green;
+    border-style: outset;
+}
